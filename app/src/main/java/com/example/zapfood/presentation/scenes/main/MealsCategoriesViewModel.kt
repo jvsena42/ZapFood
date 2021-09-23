@@ -1,5 +1,7 @@
 package com.example.zapfood.presentation.scenes.main
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,11 +17,15 @@ import javax.inject.Inject
 class MealsCategoriesViewModel @Inject constructor (
     private val getCategoriesUseCase: GetCategoriesUseCase
 ) : ViewModel() {
-    val listCategories: MutableLiveData<Resource<GetCategoriesResponse>> = MutableLiveData()
 
-    fun getCategories() = viewModelScope.launch(Dispatchers.IO) {
-        listCategories.postValue(Resource.Loading())
+    lateinit var listCategories: MutableState<Resource<GetCategoriesResponse>>
+    init {
+        getCategories()
+    }
+
+    private fun getCategories() = viewModelScope.launch(Dispatchers.IO) {
+//        listCategories.value = Resource.Loading()
         val apiResult = getCategoriesUseCase.execute()
-        listCategories.postValue(apiResult)
+        listCategories.value = apiResult
     }
 }
