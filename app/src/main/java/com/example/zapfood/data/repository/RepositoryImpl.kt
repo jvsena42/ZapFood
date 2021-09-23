@@ -18,14 +18,17 @@ class RepositoryImpl @Inject constructor (
     }
 
     private fun <T>responseToResource(response: Response<T>): Resource<T> {
-        if (response.isSuccessful){
-            response.body()?.let {result->
-                return Resource.Success(result)
+        try {
+            if (response.isSuccessful){
+                response.body()?.let {result->
+                    return Resource.Success(result)
+                }
             }
+            val message = getErrorMessage(response)
+            return Resource.Error(message)
+        }catch (e:Exception) {
+            return Resource.Error(e.message.toString())
         }
-
-        val message = getErrorMessage(response)
-        return Resource.Error(message)
     }
 
     private fun <T> getErrorMessage(response: Response<T>): String {
