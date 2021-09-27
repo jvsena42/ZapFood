@@ -18,14 +18,14 @@ class MealsCategoriesViewModel @Inject constructor (
     private val getCategoriesUseCase: GetCategoriesUseCase
 ) : ViewModel() {
 
-    lateinit var listCategories: MutableState<Resource<GetCategoriesResponse>>
+    var listCategories = MutableLiveData<Resource<GetCategoriesResponse>>()
     init {
         getCategories()
     }
 
     private fun getCategories() = viewModelScope.launch(Dispatchers.IO) {
-//        listCategories.value = Resource.Loading()
+        listCategories.postValue(Resource.Loading())
         val apiResult = getCategoriesUseCase.execute()
-        listCategories.value = apiResult
+        listCategories.postValue(apiResult)
     }
 }

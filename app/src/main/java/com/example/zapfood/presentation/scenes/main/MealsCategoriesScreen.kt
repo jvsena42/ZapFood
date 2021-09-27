@@ -12,10 +12,9 @@ import com.example.zapfood.data.util.Resource
 import com.example.zapfood.presentation.ui.theme.ZapFoodTheme
 
 @Composable
-@Preview
-fun MealsCategoriesScreen() {
-    val viewModel: MealsCategoriesViewModel = viewModel()
-    val categories = viewModel.listCategories.value
+fun MealsCategoriesScreen(viewModel: MealsCategoriesViewModel? = null) {
+    //Todo: mudar essa parte
+    val categories = viewModel?.listCategories?.value
     when(categories) {
         is Resource.Success-> {
             val list = categories.data?.categories?.toList().orEmpty()
