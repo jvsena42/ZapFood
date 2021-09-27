@@ -23,6 +23,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     ZapFoodTheme {
-//        MealsCategoriesScreen()
+        MealsCategoriesScreen()
     }
 }

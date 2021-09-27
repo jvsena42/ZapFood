@@ -32,13 +32,11 @@ class RepositoryImpl @Inject constructor (
     }
 
     private fun <T> getErrorMessage(response: Response<T>): String {
-        var message = ""
-        message = try {
+        return try {
             Gson().fromJson(response.errorBody()?.string(), ErrorModel::class.java).error.toString()
         } catch (e: Exception) {
             e.message.toString()
         }
-        return message
     }
 
 }
