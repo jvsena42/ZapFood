@@ -67,6 +67,7 @@ dependencies {
 
     // ViewModel compose
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-beta01'
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
 
     //retrofit
     def retrofit_version = "2.9.0"
