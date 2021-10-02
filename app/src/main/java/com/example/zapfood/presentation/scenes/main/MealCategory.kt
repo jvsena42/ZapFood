@@ -18,16 +18,18 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import com.example.zapfood.R
 import com.example.zapfood.data.model.response.Category
 
 @ExperimentalCoilApi
 @Composable
-fun MealCategory(category: Category) {
+fun MealCategory(category: Category, navigationCallback: (String) -> Unit) {
     var isExpanded by remember { mutableStateOf(false) }
     Card(
         shape = RoundedCornerShape(8.dp),
@@ -35,6 +37,7 @@ fun MealCategory(category: Category) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 16.dp)
+            .clickable { navigationCallback(category.id) }
     ) {
         Row(modifier = Modifier.animateContentSize()) {
             Image(
@@ -71,7 +74,7 @@ fun MealCategory(category: Category) {
                     Icons.Filled.KeyboardArrowUp
                  else
                     Icons.Filled.KeyboardArrowDown,
-                contentDescription = "Expand row icon",
+                contentDescription = stringResource(R.string.expand_row_icon),
                 modifier = Modifier
                     .padding(16.dp)
                     .align(Alignment.CenterVertically)

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Zap Food</string>
+    <string name="expand_row_icon">Expand row icon</string>
 </resources>

@@ -1,6 +1,6 @@
 package com.example.zapfood.presentation.scenes.main
 
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.zapfood.data.model.response.GetCategoriesResponse
@@ -16,15 +16,11 @@ class MealsCategoriesViewModel @Inject constructor (
     private val getCategoriesUseCase: GetCategoriesUseCase
 ) : ViewModel() {
 
-    lateinit var listCategories: MutableState<Resource<GetCategoriesResponse>>
+    var listCategories = mutableStateOf<Resource<GetCategoriesResponse>>(Resource.Loading())
 
-    init {
-        getCategories()
-    }
-
-    private fun getCategories() = viewModelScope.launch(Dispatchers.IO) {
-        listCategories.value = Resource.Loading()
-        val apiResult = getCategoriesUseCase.execute()
-        listCategories.value = apiResult
+    fun getCategories() = viewModelScope.launch(Dispatchers.IO) {
+//        listCategories.value = Resource.Loading()
+//        val apiResult = getCategoriesUseCase.execute()
+//        listCategories.value = apiResult
     }
 }
