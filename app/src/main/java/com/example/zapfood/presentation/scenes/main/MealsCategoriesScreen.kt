@@ -11,7 +11,6 @@ import com.example.zapfood.data.util.Resource
 
 @Composable
 fun MealsCategoriesScreen(viewModel: MealsCategoriesViewModel = hiltViewModel() ,navigationCallback: (String) -> Unit) {
-//    val viewModel: MealsCategoriesViewModel = viewModel()
     viewModel.getCategories()
 
     val categories = viewModel.listCategories.value
